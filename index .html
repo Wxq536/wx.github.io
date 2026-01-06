@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>汪喜琴的个人主页</title>
+  <style>
+      /* 基础样式：统一浏览器默认样式 + 响应式适配 */
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+      body {
+          font-family: "微软雅黑", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 20px 15px;
+          line-height: 1.8;
+          /* 加深金蓝交互渐变背景：暖金底+柔蓝渐变，增强层次感 */
+          background: linear-gradient(120deg, #ede0c6 0%, #e6f0ff 100%);
+          color: #444;
+      }
+      /* 标题样式：金蓝渐变强调 */
+      h1 {
+          color: #705a38; /* 进一步加深金色文字 */
+          text-align: center;
+          margin: 30px 0;
+          font-size: 2.2rem;
+          letter-spacing: 2px;
+          position: relative;
+      }
+      h1::after {
+          content: "";
+          display: block;
+          width: 80px;
+          height: 3px;
+          /* 加深版金蓝交互渐变下划线 */
+          background: linear-gradient(to right, #c5a978, #7aa7f2, #c5a978);
+          margin: 15px auto 0;
+          border-radius: 2px;
+      }
+      h2 {
+          color: #705a38;
+          text-align: center;
+          margin: 40px 0 25px;
+          font-size: 1.5rem;
+          padding-bottom: 10px;
+          /* 加深金蓝渐变边框 */
+          border-bottom: 2px solid #e0d2b8;
+          position: relative;
+      }
+      h2::after {
+          content: "";
+          display: block;
+          width: 60px;
+          height: 2px;
+          background: #7aa7f2; /* 加深蓝色 */
+          margin: -2px auto 0;
+          border-radius: 2px;
+      }
+      /* 分割线样式：加深金蓝交互渐变 */
+      hr {
+          border: none;
+          height: 2px;
+          background: linear-gradient(to right, transparent, #c5a978, #7aa7f2, #c5a978, transparent);
+          margin: 35px 0;
+          width: 80%;
+          margin-left: auto;
+          margin-right: auto;
+      }
+      /* 头像样式：加深金蓝渐变边框+阴影 */
+      .avatar {
+          border-radius: 50%;
+          /* 加深金蓝渐变边框 */
+          border: 4px solid;
+          border-image: linear-gradient(135deg, #c5a978, #7aa7f2) 1;
+          display: block;
+          margin: 0 auto 35px;
+          width: 180px;
+          height: 180px;
+          object-fit: cover;
+          box-shadow: 0 4px 12px rgba(197, 169, 120, 0.25), 0 0 15px rgba(122, 167, 242, 0.15);
+          transition: transform 0.3s ease;
+      }
+      .avatar:hover {
+          transform: scale(1.05);
+          box-shadow: 0 6px 16px rgba(197, 169, 120, 0.35), 0 0 20px rgba(122, 167, 242, 0.2);
+      }
+      /* 欢迎语样式：加深金蓝混合色调 */
+      .welcome {
+          text-align: center;
+          font-size: 1.1rem;
+          color: #806a48;
+          margin-bottom: 20px;
+          font-weight: 500;
+          text-shadow: 0 0 3px rgba(122, 167, 242, 0.15);
+      }
+      /* 关于我模块：加深金色强调+蓝色点缀 */
+      .about-me {
+          text-indent: 2em;
+          font-size: 1rem;
+          margin: 15px 0;
+      }
+      .about-me em {
+          color: #c5a978; /* 进一步加深金色强调 */
+          font-style: italic;
+          font-weight: 500;
+          text-shadow: 0 0 2px rgba(122, 167, 242, 0.25);
+      }
+      /* 列表模块：加深金蓝交互符号 */
+      .skill-list, .plan-list, .site-list {
+          padding-left: 35px;
+          margin: 20px 0;
+      }
+      .skill-list li, .plan-list li, .site-list li {
+          margin: 12px 0;
+          font-size: 1rem;
+          position: relative;
+      }
+      /* 无序列表自定义加深金蓝渐变圆点 */
+      .skill-list li::before, .site-list li::before {
+          content: "";
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          background: linear-gradient(135deg, #c5a978, #7aa7f2);
+          border-radius: 50%;
+          position: absolute;
+          left: -20px;
+          top: 8px;
+          box-shadow: 0 0 3px rgba(122, 167, 242, 0.6);
+      }
+      /* 有序列表自定义加深金蓝数字 */
+      .plan-list {
+          list-style-type: none;
+          counter-reset: plan-counter;
+      }
+      .plan-list li::before {
+          content: counter(plan-counter) ".";
+          counter-increment: plan-counter;
+          color: #c5a978;
+          font-weight: bold;
+          margin-right: 8px;
+          text-shadow: 0 0 2px rgba(122, 167, 242, 0.35);
+      }
+      /* 技能说明文本：加深金蓝混合色调 */
+      .skill-desc {
+          font-size: 0.9rem;
+          color: #806a48;
+          margin-top: 5px;
+          margin-left: 15px;
+          font-style: italic;
+      }
+      /* 链接样式：加深金蓝过渡+下划线动画 */
+      a {
+          color: #c5a978;
+          text-decoration: none;
+          position: relative;
+      }
+      a::after {
+          content: "";
+          display: block;
+          width: 0;
+          height: 2px;
+          background: linear-gradient(to right, #c5a978, #7aa7f2);
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          transition: width 0.3s ease;
+      }
+      a:hover {
+          color: #7aa7f2;
+      }
+      a:hover::after {
+          width: 100%;
+      }
+      /* 表格样式：加深金蓝渐变表头 */
+      table {
+          width: 100%;
+          border-collapse: separate;
+          border-spacing: 0;
+          margin: 25px 0;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 2px 10px rgba(197, 169, 120, 0.15), 0 0 15px rgba(122, 167, 242, 0.1);
+      }
+      th {
+          background: linear-gradient(135deg, #c5a978, #b49a68); /* 进一步加深金色渐变表头 */
+          color: #fff;
+          padding: 14px;
+          font-size: 1rem;
+          font-weight: 500;
+          text-align: center;
+          text-shadow: 0 1px 2px rgba(122, 167, 242, 0.35);
+      }
+      td {
+          padding: 14px;
+          font-size: 0.95rem;
+          text-align: center;
+          border-bottom: 1px solid #e0d2b8;
+          background-color: #fff8ef; /* 加深背景色 */
+          transition: background-color 0.3s ease;
+      }
+      tr:last-child td {
+          border-bottom: none;
+      }
+      tr:hover td {
+          background-color: #e6f0ff;
+          box-shadow: inset 0 0 10px rgba(122, 167, 242, 0.1);
+      }
+      /* 表单模块：加深金蓝边框+聚焦效果 */
+      .form-container {
+          background-color: #fff8ef;
+          padding: 30px;
+          border-radius: 8px;
+          box-shadow: 0 2px 12px rgba(197, 169, 120, 0.12), 0 0 15px rgba(122, 167, 242, 0.1);
+          margin-top: 20px;
+          border: 1px solid #e0d2b8;
+      }
+      .form-group {
+          margin: 20px 0;
+      }
+      label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 500;
+          color: #806a48;
+          font-size: 0.95rem;
+      }
+      input[type="text"],
+      input[type="email"],
+      textarea {
+          width: 100%;
+          padding: 12px 15px;
+          border: 1px solid #e0d2b8;
+          border-radius: 6px;
+          box-sizing: border-box;
+          font-size: 0.95rem;
+          background-color: #fff;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      textarea:focus {
+          outline: none;
+          border-color: #7aa7f2;
+          box-shadow: 0 0 0 3px rgba(122, 167, 242, 0.2), 0 0 5px rgba(197, 169, 120, 0.15);
+      }
+      textarea {
+          rows: 5;
+          resize: vertical;
+          min-height: 120px;
+      }
+      /* 按钮样式：加深金蓝交互渐变+阴影 */
+      .submit-btn {
+          background: linear-gradient(135deg, #c5a978, #b49a68);
+          color: #fff;
+          border: none;
+          padding: 12px 30px;
+          border-radius: 6px;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+          box-shadow: 0 2px 8px rgba(197, 169, 120, 0.35), 0 0 10px rgba(122, 167, 242, 0.15);
+      }
+      .submit-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(197, 169, 120, 0.45), 0 0 15px rgba(122, 167, 242, 0.2);
+          background: linear-gradient(135deg, #b49a68, #c5a978);
+      }
+      /* 页脚样式：加深金蓝边框+浅色调 */
+      footer {
+          text-align: center;
+          margin-top: 60px;
+          margin-bottom: 30px;
+          color: #806a48;
+          font-size: 0.9rem;
+          padding-top: 20px;
+          border-top: 1px solid #e0d2b8;
+          position: relative;
+      }
+      footer::after {
+          content: "";
+          display: block;
+          width: 100px;
+          height: 1px;
+          background: #7aa7f2;
+          margin: -1px auto 0;
+          border-radius: 2px;
+      }
+      /* 响应式适配：小屏幕优化 */
+      @media (max-width: 768px) {
+          h1 {
+              font-size: 1.8rem;
+          }
+          h2 {
+              font-size: 1.3rem;
+          }
+          .avatar {
+              width: 150px;
+              height: 150px;
+          }
+          .form-container {
+              padding: 20px 15px;
+          }
+          table {
+              font-size: 0.9rem;
+          }
+          th, td {
+              padding: 12px;
+          }
+      }
+  </style>
+</head>
+<body>
+<!-- 页面标题与欢迎语 -->
+<h1>汪喜琴的个人主页</h1>
+<p class="welcome">欢迎来到汪喜琴的个人主页</p>
+
+<!-- 头像：加深金蓝渐变边框+hover动效 -->
+<img src="C:/Users/86198/Pictures/Saved Pictures/R-C.jpg" alt="汪喜琴的头像" class="avatar">
+
+<!-- 关于我模块：加深金色强调+蓝色点缀 -->
+<h2>关于我</h2>
+<p class="about-me">大家好！我是汪喜琴，今年23岁，是一名大数据专业的大学生。日常专注于数据处理与分析相关学习，喜欢在实践中探索数据背后的规律。</p>
+<p class="about-me">我喜欢看小说、听音乐，尤其偏爱文学类小说与轻音乐，在文字与旋律中放松身心。我的座右铭是：<em>"且将新火试新茶，诗酒趁年华。"</em>，始终相信把握当下才能创造更多可能。</p>
+<hr>
+
+<!-- 我的技能模块：加深金蓝交互列表符号 -->
+<h2>我的技能</h2>
+<ul class="skill-list">
+  <li>
+    <a href="https://m.baike.com/wiki/HTML%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/5626231" target="_blank">HTML 网页设计</a>
+    <p class="skill-desc">掌握网页结构搭建，能设计功能型、信息型网页，熟悉表格布局与表单应用，可独立完成静态页面骨架开发</p>
+  </li>
+  <li>
+    <a href="https://blog.51cto.com/u_17339546/13858572" target="_blank">Python 编程</a>
+    <p class="skill-desc">了解基础语法，支持面向对象/函数式编程，可进行简单脚本开发，熟悉Pandas、NumPy等库的基础数据处理操作</p>
+  </li>
+  <li>
+    <a href="https://m.baike.com/wiki/Office%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/8252573" target="_blank">Office 办公软件</a>
+    <p class="skill-desc">熟练使用Word文字处理（排版、样式设计）、Excel电子表格（函数计算、数据可视化）、PowerPoint幻灯片（逻辑排版、动画设计），支持跨设备文件访问与协作</p>
+  </li>
+  <li>
+    <a href="http://m.toutiao.com/group/7522130061333152290/?upstream_biz=doubao" target="_blank">摄影与修图</a>
+    <p class="skill-desc">掌握"整体→局部→细节"修图流程，熟悉Lightroom影调调整与Photoshop人像精修，擅长捕捉生活中的光影细节，提升画面质感</p>
+  </li>
+</ul>
+<hr>
+
+<!-- 我的学习计划模块：加深金蓝数字 -->
+<h2>我的学习计划</h2>
+<ol class="plan-list">
+  <li>学习 HTML 基础（文档结构、常用标签），掌握语义化布局规范</li>
+  <li>学习 CSS 样式（颜色、字体、盒子模型），实现页面视觉美化与响应式适配</li>
+  <li>学习 JavaScript 交互（动态效果、事件处理），提升页面交互体验</li>
+  <li>学习大数据分析工具（Hadoop、Spark），结合Python实现数据挖掘与可视化</li>
+  <li>完成一个完整的网站项目（整合HTML/CSS/JS）与一个数据可视化项目，沉淀技术实践经验</li>
+</ol>
+<hr>
+
+<!-- 我喜欢的网站模块：加深金蓝链接 -->
+<h2>我喜欢的网站</h2>
+<p style="margin-left: 15px; color: #806a48;">以下是一些我经常访问的网站，涵盖学习、工具与兴趣领域：</p>
+<ul class="site-list">
+  <li><a href="https://www.baidu.com" target="_blank">百度 - 搜索引擎</a>：日常信息检索、资料查询的核心工具</li>
+  <li><a href="https://www.bilibili.com" target="_blank">哔哩哔哩 - 学习视频</a>：观看编程、数据分析相关教程，兼顾兴趣内容</li>
+  <li><a href="https://github.com" target="_blank">GitHub - 代码托管</a>：学习开源项目代码，托管个人练习项目</li>
+  <li><a href="https://www.kaggle.com" target="_blank">Kaggle - 数据科学平台</a>：参与数据竞赛，获取真实数据集进行分析练习</li>
+</ul>
+<hr>
+
+<!-- 联系我模块：加深金蓝渐变表格 -->
+<h2>联系我</h2>
+<table>
+  <tr>
+    <<th>联系方式</</th>
+    <<th>内容</</th>
+  </tr>
+  <tr>
+    <td>邮箱</td>
+    <td><a href="mailto:wxq@example.com">wxq@example.com</a></td>
+  </tr>
+  <tr>
+    <td>电话</td>
+    <td>123456789</td>
+  </tr>
+  <tr>
+    <td>地址</td>
+    <td>中国重庆市</td>
+  </tr>
+</table>
+<hr>
+
+<!-- 给我留言模块：加深金蓝表单 -->
+<h2>给我留言</h2>
+<div class="form-container">
+  <form>
+    <div class="form-group">
+      <label for="name">你的名字：</label>
+      <input type="text" id="name" name="name" required placeholder="请输入你的名字">
+    </div>
+    <div class="form-group">
+      <label for="email">你的邮箱：</label>
+      <input type="email" id="email" name="email" required placeholder="请输入你的邮箱（便于回复）">
+    </div>
+    <div class="form-group">
+      <label for="message">留言内容：</label>
+      <textarea id="message" name="message" rows="5" required placeholder="请输入你的留言（如技术交流、学习疑问等）"></textarea>
+    </div>
+    <button type="submit" class="submit-btn">提交留言</button>
+  </form>
+</div>
+
+<!-- 页脚信息 -->
+<footer>
+  <p>版权所有 © 2025 汪喜琴 | 最后更新：2025年1月</p>
+</footer>
+</body>
+</html>
